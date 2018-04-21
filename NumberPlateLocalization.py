@@ -166,6 +166,19 @@ def main(mode, number, imageName, steps, write):
             cv2.destroyAllWindows()
             # Save Output Image to FinalOutput directory
             if(write):
+                if(steps):
+                    os.chdir(OUTPUT_PATH)
+                    os.makedirs(os.path.splitext(image)[0])
+                    os.chdir('..')
+                    STEPS = os.path.join(OUTPUT_PATH, os.path.splitext(image)[0])
+                    cv2.imwrite(os.path.join(STEPS, '1.png'), grayscaleImage)
+                    cv2.imwrite(os.path.join(STEPS, '2.png'), noiseRemovedImage)
+                    cv2.imwrite(os.path.join(STEPS, '3.png'), histEqImage)
+                    cv2.imwrite(os.path.join(STEPS, '4.png'), openedImage)
+                    cv2.imwrite(os.path.join(STEPS, '5.png'), subtractedImage)
+                    cv2.imwrite(os.path.join(STEPS, '6.png'), threshImage)
+                    cv2.imwrite(os.path.join(STEPS, '7.png'), edgeDetectedImage)
+                    cv2.imwrite(os.path.join(STEPS, '8.png'), dilatedImage)
                 cv2.imwrite(os.path.join(OUTPUT_PATH, os.path.splitext(image)[0] + "-detected.png"), finalImage)
         except:
             print("Fatal Error. Cannot Continue.")
